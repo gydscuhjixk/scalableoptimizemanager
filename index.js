@@ -1,10 +1,13 @@
-function wiggleSort(nums) {
-  nums.sort((a, b) => a - b);
-  const median = Math.floor((nums.length + 1) / 2);
-  const left = nums.slice(0, median);
-  const right = nums.slice(median);
-  for (let i = 0; i < nums.length; i++) {
-    if (i % 2 === 0) nums[i] = left.pop();
-    else nums[i] = right.pop();
+function lengthOfLongestSubstring(s) {
+  const map = new Map();
+  let maxLength = 0;
+  let left = 0;
+  for (let right = 0; right < s.length; right++) {
+    if (map.has(s[right])) {
+      left = Math.max(left, map.get(s[right]) + 1);
+    }
+    map.set(s[right], right);
+    maxLength = Math.max(maxLength, right - left + 1);
   }
+  return maxLength;
 }
